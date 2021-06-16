@@ -40,6 +40,14 @@ class MyStack {
     return this;
 
   }
+
+  isEmpty() {
+    if(this.top === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 class BinaryTree {
   constructor() {
@@ -61,27 +69,30 @@ class BinaryTree {
 
     let stack = new MyStack();
     let leafNodes = "Leaf node is : ";
-    const findTrees = (tempNode, leafNodes) => {      
-      if(!tempNode) {
-        return leafNodes;
-      }
-
-      if(!(tempNode.left && tempNode.right))
-      {
-        console.log(tempNode.value)
-      }
-
-      if(tempNode.left) {
-        return findTrees(tempNode.left);
-      } else if(tempNode.right) {
-        return findTrees(tempNode.right)
-      }
-
+    let current = this;
+    if(!current) {
+      return null;
     }
-    leafNodes += findTrees(this.root, leafNodes)
+
+    stack.push(current);
+
+    console.log(stack.data[0])
+    while(!stack.isEmpty()) {
+      current = stack.data[0];
+      stack.pop();
+      if(current.left) {
+        stack.push(current.left);
+      }
+      if(current.right) {
+        stack.push(current.right)
+      }
+      if(!(current.left && current.right)) {
+        leafNodes+= current.value + " ";
+      }
+    }
+
     
-    return leafNodes;
-  
+    console.log(leafNodes)
   }
 
   insert(value) {
@@ -90,20 +101,18 @@ class BinaryTree {
       this.root = newNode;
       return this;
     } else {
-      let current = this.root;
-      while(current) {
-        if(!current.left) {
-            current.left = newNode
-            break;
-        } else if(!current.right) {
-          current.right = newNode;
-          break; 
-        } if(current.left) {
-          current = current.left;
-        } else if(current.right) {
-          current = current.right;
-        }
+      while(true) {
+      /*
+      # if left side is equal to null 
+      # then place value 
+      # if right side is equal to null
+      # then place value 
+      # check each value before going on to next level.
+      */ 
+
+
       }
+   
     } 
   }
 }
@@ -125,20 +134,18 @@ function manualTreeTest() {
   obj.root = new Node(15);
   //left side 
   obj.root.left = new Node(12);
+  // right side of 15
+    obj.root.right = new Node(21)
   // children of 12
   obj.root.left.left = new Node(1);
   obj.root.left.right = new Node(39);
   // child of 40 
   obj.root.left.right.left = new Node(40);
-  // right side of 15
-  obj.root.right = new Node(21)
   // children of 21
   obj.root.right.right = new Node(10)
   obj.root.right.left = new Node(9);
   // child of 9
   obj.root.right.left.left = new Node(2)
-
-  //console.log(JSON.stringify(obj))
   /*
  ......
   */
@@ -169,8 +176,7 @@ function dyanmicTreeTest() {
   obj.insert(21);
   obj.insert(1);
   obj.insert(39);
-  obj.insert(10);
-  obj.insert(9);
+  obj.insert(40);
 
 
 
