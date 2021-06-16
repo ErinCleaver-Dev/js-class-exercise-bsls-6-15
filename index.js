@@ -68,7 +68,7 @@ class BinaryTree {
 
       if(!(tempNode.left && tempNode.right))
       {
-        console.log(tempNode.value);
+        console.log(tempNode.value)
       }
 
       if(tempNode.left) {
@@ -95,13 +95,12 @@ class BinaryTree {
         if(!current.left) {
             current.left = newNode
             break;
-        } else {
+        } else if(!current.right) {
+          current.right = newNode;
+          break; 
+        } if(current.left) {
           current = current.left;
-        }
-        if(!current.right) {
-            current.right = newNode;
-            break;
-        } else {
+        } else if(current.right) {
           current = current.right;
         }
       }
@@ -145,7 +144,7 @@ function manualTreeTest() {
   */
   console.log('Leaf node is : ');
   //Display Tree elements
-  //obj.print_leaf_node(); // Leaf node is :  1  40  10  2
+  obj.print_leaf_node(); // Leaf node is :  1  40  10  2
 }
 manualTreeTest();
 
@@ -164,14 +163,19 @@ function dyanmicTreeTest() {
     		*/
   //insertion of binary Tree nodes - Build it manually then dynamically
   obj.insert(15);
+  // value 12 is to the left
   obj.insert(12);
+  // value 21 is to the right
+  obj.insert(21);
   obj.insert(1);
   obj.insert(39);
-  obj.insert(40);
-  obj.insert(21);
   obj.insert(10);
   obj.insert(9);
-  obj.insert(2);
+
+
+
+
+
 
   console.log(JSON.stringify(obj))
   /*
