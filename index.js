@@ -77,6 +77,10 @@ class BinaryTree {
     stack.push(this.root);
 
     console.log(stack.data[0])
+
+    // The try cache is here so that the code will still run even though the it is not working
+    // Currently the left node when called is returning undefined.  It should return the value.
+    // This breaks the if statement
     try {
     while(!stack.isEmpty()) {
       let current = stack.data[0];
