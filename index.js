@@ -69,28 +69,35 @@ class BinaryTree {
 
     let stack = new MyStack();
     let leafNodes = "Leaf node is : ";
-    let current = this;
-    if(!current) {
+    
+    if(!this.root) {
       return null;
     }
 
-    stack.push(current);
+    stack.push(this.root);
 
     console.log(stack.data[0])
+    try {
     while(!stack.isEmpty()) {
-      current = stack.data[0];
+      let current = stack.data[0];
       stack.pop();
+      console.log(current)
+      if(!(current.left && current.right)) {
+        
+        leafNodes+= current.value + " ";
+      }
       if(current.left) {
         stack.push(current.left);
       }
       if(current.right) {
         stack.push(current.right)
       }
-      if(!(current.left && current.right)) {
-        leafNodes+= current.value + " ";
-      }
+     
     }
-
+    } catch(e) {
+      console.log(e);
+    }
+    
     
     console.log(leafNodes)
   }
@@ -191,4 +198,4 @@ function dyanmicTreeTest() {
   //Display Tree elements
   obj.print_leaf_node(); // Leaf node is :  1  40  10  2
 }
-dyanmicTreeTest();
+//dyanmicTreeTest();
