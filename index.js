@@ -15,16 +15,15 @@ class Node {
 }
 //Define a Stack Class
 class MyStack {
-  constructor(element) {
+  constructor(element = []) {
     //Assign the needed properties
     this.data = [element]
     this.top = 0;
   }
    //Add element into stack;
    push(node) {
-
-    this.data[this.top] = node;
     this.top++;
+    this.data[this.top] = node;
     return this;
     
     //push the node into the stack
@@ -42,7 +41,7 @@ class MyStack {
   }
 
   isEmpty() {
-    if(this.top === 0) {
+    if(this.top < 0) {
       return true;
     } else {
       return false;
@@ -67,7 +66,7 @@ class BinaryTree {
     //remove MyStack element
     //visit right-subtree
 
-    let stack = new MyStack(this.root);
+    let stack = new MyStack();
     let leafNodes = "Leaf node is : ";
     
     if(!this.root) {
@@ -83,32 +82,65 @@ class BinaryTree {
 
     // fixed the issue with the current being undefined.  Currently is only going throug the loop once. 
 
-    let current = this;
+    let current = null; 
+
+
+    // manual way
+
     try {
-    while(stack.isEmpty()) { 
+
+    const leafNodes = (current, stack) => {
+      if(!this.root) {
+        return null;
+      }
+
+      if(current.left == null && current.right == null) {
+        stack.push(current.value);
+        console.log(current.value)
+      }
+       
+      if(current.left) {
+        console.log(`Test 1: ${current.left}`)
+        leafNodes(current.left ,stack)
+        //console.log("test 1 " + JSON.stringify(stack.data))
+      } 
+      if(current.right) {
+        leafNodes(current.right, stack);
+      }
+    }
+    
+    
+    leafNodes(this.root, stack)
+
+    /*
+    while(!stack.isEmpty()) { 
 
       current = stack.data[0];
-      
+     
       //console.log(JSON.stringify(current))
+
+      // First it should check if current left && right is null 
       if(current.left == null && current.right == null) {
-        console.log(current)
         stack.pop();
+        console.log(current.value)
       }
-      if(current.left != null) {
-        
-        stack.push(current.left);
-        console.log("test 1 " + JSON.stringify(stack.data))
-      }
-      if(current.right != null) {
-        console.log()
-        stack.push(current.right);
-        console.log("test 2 " + JSON.stringify(stack.data))
-      }
+
+      // then it should add a new value to the top. 
+      // It pushs the new value onto the stack at point 0.
+
+    
       
+      if(current.left) {
+        console.log(`Test 1: ${current.left}`)
+        stack.push(current.left);
+        //console.log("test 1 " + JSON.stringify(stack.data))
+      } 
+      if(current.right) {
+        stack.push(current.right);
+      }
+    */
       
     
-      stack.pop();
-    }
     } catch(e) {
       console.log(e);
     }
