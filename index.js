@@ -24,7 +24,7 @@ class MyStack {
    push(node) {
 
     this.data[this.top] = node;
-    this.top = this.top+1;
+    this.top++;
     return this;
     
     //push the node into the stack
@@ -35,7 +35,7 @@ class MyStack {
     if(this.isEmpty()) {
       return "Empty";
     }
-    this.top-1;
+    this.top--;
     this.data.pop();
     return this;
 
