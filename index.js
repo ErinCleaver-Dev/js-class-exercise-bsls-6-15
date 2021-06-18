@@ -80,30 +80,34 @@ class BinaryTree {
     // The try cache is here so that the code will still run even though it is not working
     // Currently the left node when called is returning undefined.  It should return null.
     // This breaks the if statement
+
+    // fixed the issue with the current being undefined.  Currently is only going throug the loop once. 
+
     let current = this;
     try {
-    while(stack.isEmpty()) {
+    while(stack.isEmpty()) { 
 
       current = stack.data[0];
-      stack.pop();
-      //console.log(JSON.stringify(current))
       
+      //console.log(JSON.stringify(current))
+      if(current.left == null && current.right == null) {
+        console.log(current)
+        stack.pop();
+      }
       if(current.left != null) {
         
         stack.push(current.left);
-        console.log("test 1 " + JSON.stringify(stack.data[0]))
+        console.log("test 1 " + JSON.stringify(stack.data))
       }
       if(current.right != null) {
         console.log()
         stack.push(current.right);
-        console.log("test 2 " + JSON.stringify(stack.data[0]))
+        console.log("test 2 " + JSON.stringify(stack.data))
       }
       
-      if(current.left == null && current.right == null) {
-        console.log(current)
-      }
+      
     
-     
+      stack.pop();
     }
     } catch(e) {
       console.log(e);
