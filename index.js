@@ -54,6 +54,25 @@ class BinaryTree {
     this.top = null;
   }
   //print leaf nodes of binary tree
+
+  leafNodes (current, stack) {
+    if(!this.root) {
+      return null;
+    }
+
+    if(current.left == null && current.right == null) {
+      stack.push(current);
+    }
+     
+    if(current.left) {
+      this.leafNodes(current.left, stack)
+      //console.log("test 1 " + JSON.stringify(stack.data))
+    } 
+    if(current.right) {
+      this.leafNodes(current.right, stack);
+    }
+  }
+
   print_leaf_node() {
     //some hints:
     //When current temp node of tree is not NULL
@@ -66,7 +85,7 @@ class BinaryTree {
     //visit right-subtree
 
     let stack = new MyStack();
-    let leafNodes = "Leaf node is: ";
+    let leafNode = "Leaf node is: ";
     
     if(!this.root) {
       return null;
@@ -83,37 +102,15 @@ class BinaryTree {
 
     // manual way
 
-    try {
-
-    const leafNodes = (current, stack) => {
-      if(!this.root) {
-        return null;
-      }
-
-      if(current.left == null && current.right == null) {
-        stack.push(current.value);
-      }
-       
-      if(current.left) {
-        leafNodes(current.left, stack)
-        //console.log("test 1 " + JSON.stringify(stack.data))
-      } 
-      if(current.right) {
-        leafNodes(current.right, stack);
-      }
-    }
     
-    leafNodes(this.root, stack)
-      
-    
-    } catch(e) {
-      console.log(e);
-    }
+    this.leafNodes(this.root, stack)
+     
     for(let i = 0; i < stack.data.length; i++) {
-      leafNodes += stack.data[i] + " ";
+      
+      console.log("test 2: " + stack.data[i].value)
     }
 
-    console.log(leafNodes)
+    console.log(leafNode)
   }
 
   insert(value) {
@@ -129,32 +126,12 @@ class BinaryTree {
       # then place value 
       # check each value before going on to next level.
       */ 
-      let stack = new MyStack()
-
-      stack.push(this.root)
-      while(!stack.isEmpty()) {
-        
-        const newNode = new Node(value);
-        let current = stack.pop();
-        
-        console.log('test 1: ' + JSON.stringify(current.left))
+      let current =this.root;
+      let stack = new MyStack(this.root)
       
-        if(!current.left) {
-          current.left = newNode;
-          return  
-        } else {
-          stack.push(current.left)
-        }
-
-          
-        if(!current.right) {
-          current.right = newNode;
-          return 
-        } else {
-          stack.push(current.right)
-        }
-
-      }
+  
+      
+      
     }
   }
 }
