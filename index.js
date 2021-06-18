@@ -17,7 +17,7 @@ class Node {
 class MyStack {
   constructor(element) {
     //Assign the needed properties
-    this.data = [element];
+    this.data = [];
     this.top = 0;
   }
    //Add element into stack;
@@ -35,8 +35,7 @@ class MyStack {
       return "Empty";
     }
     this.top--;
-    this.data.pop();
-    return this;
+    return  this.data.pop();
 
   }
 
@@ -130,20 +129,23 @@ class BinaryTree {
       # then place value 
       # check each value before going on to next level.
       */ 
-      let stack = new MyStack(this.root)
+      let stack = new MyStack()
 
+      stack.push(this.root)
       while(!stack.isEmpty()) {
         
         const newNode = new Node(value);
-        let current = stack.data[0]
-        stack.pop()
+        let current = stack.pop();
+        
         console.log('test 1: ' + JSON.stringify(current.left))
+      
         if(!current.left) {
           current.left = newNode;
           return  
         } else {
           stack.push(current.left)
         }
+
           
         if(!current.right) {
           current.right = newNode;
@@ -217,6 +219,11 @@ function dyanmicTreeTest() {
   obj.insert(1);
   obj.insert(39);
   obj.insert(40);
+  obj.insert(10);
+  obj.insert(9);
+  obj.insert(2);
+
+
 
 
 
