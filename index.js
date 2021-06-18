@@ -89,17 +89,18 @@ class BinaryTree {
       //console.log(JSON.stringify(current))
       
       if(current.left != null) {
-        console.log("test 1")
+        
         stack.push(current.left);
+        console.log("test 1 " + JSON.stringify(stack.data[0]))
       }
       if(current.right != null) {
         console.log()
         stack.push(current.right);
-        console.log("test 2" + JSON.stringify(stack.data[0]))
+        console.log("test 2 " + JSON.stringify(stack.data[0]))
       }
       
       if(current.left == null && current.right == null) {
-        console.log("test 3")
+        console.log(current)
       }
     
      
@@ -108,7 +109,7 @@ class BinaryTree {
       console.log(e);
     }
     
-    
+
     console.log(leafNodes)
   }
 
