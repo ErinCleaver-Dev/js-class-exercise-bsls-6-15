@@ -15,9 +15,9 @@ class Node {
 }
 //Define a Stack Class
 class MyStack {
-  constructor(element = []) {
+  constructor(element) {
     //Assign the needed properties
-    this.data = [element]
+    this.data = [element];
     this.top = 0;
   }
    //Add element into stack;
@@ -130,29 +130,30 @@ class BinaryTree {
       # then place value 
       # check each value before going on to next level.
       */ 
-      const leafNodes = (current, value) => {
-        if(!current) {
-          return null;
-        }
+      let stack = new MyStack(this.root)
+
+      while(!stack.isEmpty()) {
+        
         const newNode = new Node(value);
-        if(current.left == null) {
-          console.log(current)
+        let current = stack.data[0]
+        stack.pop()
+        console.log('test 1: ' + JSON.stringify(current.left))
+        if(!current.left) {
           current.left = newNode;
           return  
         } else {
-          leafNodes(current.left, value)
+          stack.push(current.left)
         }
           
-        if(current.right == null) {
-          current.value = newNode;
+        if(!current.right) {
+          current.right = newNode;
           return 
         } else {
-          leafNodes(current.right, value)
+          stack.push(current.right)
         }
-      }
 
-      leafNodes(this.root, value)
-    } 
+      }
+    }
   }
 }
 
