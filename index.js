@@ -101,7 +101,7 @@ class BinaryTree {
        
       if(current.left) {
         console.log(`Test 1: ${current.left}`)
-        leafNodes(current.left ,stack)
+        leafNodes(current.left, stack)
         //console.log("test 1 " + JSON.stringify(stack.data))
       } 
       if(current.right) {
@@ -146,7 +146,7 @@ class BinaryTree {
     }
     
 
-    console.log(leafNodes)
+    console.log(leafNodes + stack.data)
   }
 
   insert(value) {
