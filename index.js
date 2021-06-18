@@ -73,6 +73,27 @@ class BinaryTree {
     }
   }
 
+  // Function to be used to get the last branch that was updated on a given level.
+  getLastBranch (current, stack) {
+    if(stack.data.length) {
+      return null;
+    }
+
+    if(current.top == null && current.right == null) {
+      current.top == 0;
+    } else if(current.top == 0 && current.right == null) {
+      stack.push*
+    }
+     
+    if(current.left) {
+      this.getLastBranch(current.left, stack)
+      //console.log("test 1 " + JSON.stringify(stack.data))
+    } 
+    if(current.right) {
+      this.getLastBranch(current.right, stack);
+    }
+  }
+
   print_leaf_node() {
     //some hints:
     //When current temp node of tree is not NULL
@@ -101,13 +122,15 @@ class BinaryTree {
     // fixed the issue with the current being undefined.  Currently is only going throug the loop once. 
 
     // manual way
-
     
     this.leafNodes(this.root, stack)
      
     for(let i = 0; i < stack.data.length; i++) {
-      
-      console.log("test 2: " + stack.data[i].value)
+      for(let value in stack.data[i]) {
+        if(stack.data[i][value] != null) {
+          leafNode += stack.data[i][value] + " ";
+        }
+      }
     }
 
     console.log(leafNode)
@@ -119,19 +142,33 @@ class BinaryTree {
       this.root = newNode;
       return this;
     } else {
-      /*
-      # if left side is equal to null 
-      # then place value 
-      # if right side is equal to null
-      # then place value 
-      # check each value before going on to next level.
-      */ 
-      let current =this.root;
-      let stack = new MyStack(this.root)
+     
+      let stack = new MyStack();
+      let current = null;
+
+      this.getLastBranch(this.root, stack)
+     
+      console.log("Test 1: " + JSON.stringify(stack))
       
-  
-      
-      
+      current = stack.data[stack.data.length - 1];
+
+
+      console.log(current)
+
+      try{
+        console.log("test 1")
+        if(!current.left) {
+          current.left = newNode;
+        }
+        if(!current.right) {
+          current.right = newNode;
+        }
+      }catch(error) {
+        console.log(error)
+      }
+
+
+    
     }
   }
 }
