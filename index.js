@@ -17,7 +17,7 @@ class Node {
 class MyStack {
   constructor(element) {
     //Assign the needed properties
-    this.data = []
+    this.data = [element]
     this.top = 0;
   }
    //Add element into stack;
@@ -67,35 +67,41 @@ class BinaryTree {
     //remove MyStack element
     //visit right-subtree
 
-    let stack = new MyStack();
+    let stack = new MyStack(this.root);
     let leafNodes = "Leaf node is : ";
     
     if(!this.root) {
       return null;
     }
 
-    stack.push(this.root);
+    
 
-    console.log(stack.data[0])
 
-    // The try cache is here so that the code will still run even though the it is not working
-    // Currently the left node when called is returning undefined.  It should return the value.
+    // The try cache is here so that the code will still run even though it is not working
+    // Currently the left node when called is returning undefined.  It should return null.
     // This breaks the if statement
+    let current = this;
     try {
-    while(!stack.isEmpty()) {
-      let current = stack.data[0];
+    while(stack.isEmpty()) {
+
+      current = stack.data[0];
       stack.pop();
-      console.log(current)
-      if(!(current.left && current.right)) {
-        
-        leafNodes+= current.value + " ";
-      }
-      if(current.left) {
+      //console.log(JSON.stringify(current))
+      
+      if(current.left != null) {
+        console.log("test 1")
         stack.push(current.left);
       }
-      if(current.right) {
-        stack.push(current.right)
+      if(current.right != null) {
+        console.log()
+        stack.push(current.right);
+        console.log("test 2" + JSON.stringify(stack.data[0]))
       }
+      
+      if(current.left == null && current.right == null) {
+        console.log("test 3")
+      }
+    
      
     }
     } catch(e) {
@@ -120,7 +126,7 @@ class BinaryTree {
       # then place value 
       # check each value before going on to next level.
       */ 
-
+        
 
       }
    
@@ -160,7 +166,7 @@ function manualTreeTest() {
   /*
  ......
   */
-  console.log('Leaf node is : ');
+  // console.log('Leaf node is : ');
   //Display Tree elements
   obj.print_leaf_node(); // Leaf node is :  1  40  10  2
 }
