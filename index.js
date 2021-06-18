@@ -82,9 +82,6 @@ class BinaryTree {
 
     // fixed the issue with the current being undefined.  Currently is only going throug the loop once. 
 
-    let current = null; 
-
-
     // manual way
 
     try {
@@ -96,11 +93,9 @@ class BinaryTree {
 
       if(current.left == null && current.right == null) {
         stack.push(current.value);
-        console.log(current.value)
       }
        
       if(current.left) {
-        console.log(`Test 1: ${current.left}`)
         leafNodes(current.left, stack)
         //console.log("test 1 " + JSON.stringify(stack.data))
       } 
@@ -110,34 +105,6 @@ class BinaryTree {
     }
     
     leafNodes(this.root, stack)
-
-    /*
-    while(!stack.isEmpty()) { 
-
-      current = stack.data[0];
-     
-      //console.log(JSON.stringify(current))
-
-      // First it should check if current left && right is null 
-      if(current.left == null && current.right == null) {
-        stack.pop();
-        console.log(current.value)
-      }
-
-      // then it should add a new value to the top. 
-      // It pushs the new value onto the stack at point 0.
-
-    
-      
-      if(current.left) {
-        console.log(`Test 1: ${current.left}`)
-        stack.push(current.left);
-        //console.log("test 1 " + JSON.stringify(stack.data))
-      } 
-      if(current.right) {
-        stack.push(current.right);
-      }
-    */
       
     
     } catch(e) {
@@ -156,7 +123,6 @@ class BinaryTree {
       this.root = newNode;
       return this;
     } else {
-      while(true) {
       /*
       # if left side is equal to null 
       # then place value 
@@ -164,10 +130,28 @@ class BinaryTree {
       # then place value 
       # check each value before going on to next level.
       */ 
-        
-
+      const leafNodes = (current, value) => {
+        if(!current) {
+          return null;
+        }
+        const newNode = new Node(value);
+        if(current.left == null) {
+          console.log(current)
+          current.left = newNode;
+          return  
+        } else {
+          leafNodes(current.left, value)
+        }
+          
+        if(current.right == null) {
+          current.value = newNode;
+          return 
+        } else {
+          leafNodes(current.right, value)
+        }
       }
-   
+
+      leafNodes(this.root, value)
     } 
   }
 }
@@ -246,4 +230,4 @@ function dyanmicTreeTest() {
   //Display Tree elements
   obj.print_leaf_node(); // Leaf node is :  1  40  10  2
 }
-//dyanmicTreeTest();
+dyanmicTreeTest();
