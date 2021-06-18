@@ -67,7 +67,7 @@ class BinaryTree {
     //visit right-subtree
 
     let stack = new MyStack();
-    let leafNodes = "Leaf node is : ";
+    let leafNodes = "Leaf node is: ";
     
     if(!this.root) {
       return null;
@@ -109,7 +109,6 @@ class BinaryTree {
       }
     }
     
-    
     leafNodes(this.root, stack)
 
     /*
@@ -144,9 +143,11 @@ class BinaryTree {
     } catch(e) {
       console.log(e);
     }
-    
+    for(let i = 0; i < stack.data.length; i++) {
+      leafNodes += stack.data[i] + " ";
+    }
 
-    console.log(leafNodes + stack.data)
+    console.log(leafNodes)
   }
 
   insert(value) {
