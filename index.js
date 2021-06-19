@@ -29,6 +29,11 @@ class MyStack {
     //push the node into the stack
     //assign the top node
   }
+
+  update(node) {
+    this.data[this.top] = node;
+    return this
+  }
   //remove top element of the stack
   pop() {
     if(this.isEmpty()) {
@@ -60,10 +65,12 @@ class BinaryTree {
       return null;
     }
 
-    if(current.left == null && current.right == null) {
+    if(current.right) {
+      stack.push(current);    
+    } else if(current.left == null && current.right == null) {
       stack.push(current);
     }
-     
+    
     if(current.left) {
       this.leafNodes(current.left, stack)
       //console.log("test 1 " + JSON.stringify(stack.data))
@@ -75,21 +82,24 @@ class BinaryTree {
 
   // Function to be used to get the last branch that was updated on a given level.
   getLastBranch (current, stack) {
-    if(stack.data.length) {
+    if(!this.root) {
       return null;
     }
   
+   
+   
     if(current.left == null && current.right == null) {
-      stack.push(current)
-    }
-     
+      stack.update(current)
+    } 
+    
+    if(current.right) {
+      this.getLastBranch(current.right, stack);
+    } 
     if(current.left) {
       this.getLastBranch(current.left, stack)
       //console.log("test 1 " + JSON.stringify(stack.data))
     } 
-    if(current.right) {
-      this.getLastBranch(current.right, stack);
-    }
+    
   }
 
   print_leaf_node() {
@@ -146,7 +156,7 @@ class BinaryTree {
 
       this.getLastBranch(this.root, stack)
      
-      console.log("Test 1: " + JSON.stringify(stack))
+      //console.log("Test 1: " + JSON.stringify(stack))
       
       current = stack.data[stack.data.length - 1];
 
@@ -155,10 +165,11 @@ class BinaryTree {
 
       try{
         console.log("test 1")
-        if(!current.left) {
-          current.left = newNode;
-        } else if(!current.right) {
+        if(!current.right) {
+          console.log("Test 1" + JSON.stringify(current) + "\n")
           current.right = newNode;
+        } else if(!current.left) {
+          current.left = newNode;
         }
       }catch(error) {
         console.log(error)
