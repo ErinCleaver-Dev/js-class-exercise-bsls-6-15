@@ -65,10 +65,9 @@ class BinaryTree {
       return null;
     }
 
-    if(current.right) {
-      stack.push(current);    
-    } else if(current.left == null && current.right == null) {
-      stack.push(current);
+ 
+    if(current.left == null && current.right == null) {
+      stack.push(current.value);
     }
     
     if(current.left) {
@@ -134,12 +133,9 @@ class BinaryTree {
     this.leafNodes(this.root, stack)
      
     for(let i = 0; i < stack.data.length; i++) {
-      for(let value in stack.data[i]) {
-        if(stack.data[i][value] != null) {
-          leafNode += stack.data[i][value] + " ";
-        }
-      }
+      leafNode += stack.data[i] + " "
     }
+    
 
     console.log(leafNode)
   }
@@ -161,12 +157,12 @@ class BinaryTree {
       current = stack.data[stack.data.length - 1];
 
 
-      console.log(current)
+      //console.log(current)
 
       try{
-        console.log("test 1")
+        //console.log("test 1")
         if(!current.right) {
-          console.log("Test 1" + JSON.stringify(current) + "\n")
+          //console.log("Test 1" + JSON.stringify(current) + "\n")
           current.right = newNode;
         } else if(!current.left) {
           current.left = newNode;
@@ -252,11 +248,11 @@ function dyanmicTreeTest() {
 
 
 
-  console.log(JSON.stringify(obj))
+  //console.log(JSON.stringify(obj))
   /*
  ......
   */
-  console.log('Leaf node is : ');
+  //console.log('Leaf node is : ');
   //Display Tree elements
   obj.print_leaf_node(); // Leaf node is :  1  40  10  2
 }
