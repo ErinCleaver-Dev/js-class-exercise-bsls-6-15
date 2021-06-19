@@ -160,7 +160,10 @@ class BinaryTree {
 
  
       //console.log("test 1")
-      if(!current.right) {
+
+      if(!current.value) {
+        current.left = newNode;
+      } else if(!current.right) {
         //console.log("Test 1" + JSON.stringify(current) + "\n")
         current.right = newNode;
       } else if(!current.left) {
