@@ -78,11 +78,9 @@ class BinaryTree {
     if(stack.data.length) {
       return null;
     }
-
-    if(current.top == null && current.right == null) {
-      current.top == 0;
-    } else if(current.top == 0 && current.right == null) {
-      stack.push*
+  
+    if(current.left == null && current.right == null) {
+      stack.push(current)
     }
      
     if(current.left) {
@@ -159,8 +157,7 @@ class BinaryTree {
         console.log("test 1")
         if(!current.left) {
           current.left = newNode;
-        }
-        if(!current.right) {
+        } else if(!current.right) {
           current.right = newNode;
         }
       }catch(error) {
