@@ -85,22 +85,15 @@ class BinaryTree {
       return null;
     }
   
-   
-   
-  
-      if(!current.left) {
-        stack.update(current)
-      }
-      if(!current.right) {
-        stack.update(current)
-      }
-
+    if(!current.left || !current.right) {
+      stack.update(current)
+    }
     
-    if(current.left && !current.right) {
-      this.getLastBranch(current.left, stack);
+    if(current.left) {
+      this.getLastBranch(current.right, stack);
     } 
-    if(current.right && current.left) {
-      this.getLastBranch(current.right, stack)
+    if(current.left && current.right) {
+      this.getLastBranch(current.left, stack)
       //console.log("test 1 " + JSON.stringify(stack.data))
     } 
     
@@ -162,6 +155,7 @@ class BinaryTree {
       current = stack.pop();
 
 
+      
       //console.log(current)
 
  
