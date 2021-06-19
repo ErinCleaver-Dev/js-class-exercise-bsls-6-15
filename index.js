@@ -87,15 +87,20 @@ class BinaryTree {
   
    
    
-    if(current.left == null && current.right == null) {
-      stack.update(current)
-    } 
+  
+      if(!current.left) {
+        stack.update(current)
+      }
+      if(!current.right) {
+        stack.update(current)
+      }
+
     
-    if(current.right) {
-      this.getLastBranch(current.right, stack);
+    if(current.left && !current.right) {
+      this.getLastBranch(current.left, stack);
     } 
-    if(current.left) {
-      this.getLastBranch(current.left, stack)
+    if(current.right && current.left) {
+      this.getLastBranch(current.right, stack)
       //console.log("test 1 " + JSON.stringify(stack.data))
     } 
     
@@ -154,22 +159,20 @@ class BinaryTree {
      
       //console.log("Test 1: " + JSON.stringify(stack))
       
-      current = stack.data[stack.data.length - 1];
+      current = stack.pop();
 
 
       //console.log(current)
 
-      try{
-        //console.log("test 1")
-        if(!current.right) {
-          //console.log("Test 1" + JSON.stringify(current) + "\n")
-          current.right = newNode;
-        } else if(!current.left) {
-          current.left = newNode;
-        }
-      }catch(error) {
-        console.log(error)
+ 
+      //console.log("test 1")
+      if(!current.right) {
+        //console.log("Test 1" + JSON.stringify(current) + "\n")
+        current.right = newNode;
+      } else if(!current.left) {
+        current.left = newNode;
       }
+
 
 
     
@@ -244,7 +247,7 @@ function dyanmicTreeTest() {
 
 
 
-
+  console.log(JSON.stringify(obj))
 
 
 
